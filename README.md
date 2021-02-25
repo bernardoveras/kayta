@@ -14,6 +14,7 @@ Package para uso interno na VVS Sistemas
   - [DateTime Extensions](#datetime-extensions)
   - [Double Extensions](#double-extensions)
   - [String Extensions](#string-extensions)
+  - [TextField Formatter's](#textfield-formatters)
 
 # Instalação
 
