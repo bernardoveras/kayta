@@ -28,8 +28,8 @@ import 'package:kayta/kayta.dart';
   
 ``` dart  
 // Import package  
-import 'package:kayta/cpf_validator.dart';  
-  
+import 'package:kayta/validators/cpf_validator.dart';
+
 CPFValidator.isValid("334.616.710-02") // true
 CPFValidator.isValid("334.616.710-01") // false
 CPFValidator.isValid("35999906032") // true
@@ -57,7 +57,7 @@ CPFValidator.generate(true) // Result: 334.616.710-02
   
 ``` dart  
 // Import package  
-import 'package:kayta/cnpj_validator.dart';  
+import 'package:kayta/validators/cnpj_validator.dart'; 
   
 CNPJValidator.isValid("12.175.094/0001-19") // true
 CNPJValidator.isValid("12.175.094/0001-18") // false
