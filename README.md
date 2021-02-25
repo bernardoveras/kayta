@@ -81,7 +81,7 @@ CNPJValidator.generate() // Result: 85137090000110
 CNPJValidator.generate(true) // Result: 85.137.090/0001-10 
 ```  
 
-## DateTime Extension
+## DateTime Extensions
   
 ``` dart  
 // Import package  
@@ -110,4 +110,24 @@ DateTime(2021, 02, 25).addMonth(2)
 DateTime date = DateTime(2021, 02, 25) // 25/02/2021
 date.copy(day: 5) // 05/02/2021
 
+```  
+
+## Double Extensions
+  
+``` dart  
+// Import package  
+import 'package:kayta/extensions/double_extensions.dart';
+
+/// [Formatter's]
+'1200.99'.format() // 1.200,99
+'1200.99'.format(pattern: '#,##0') // 1.200,99
+'1200.99'.format(locale: 'pt_BR') // 1.200,99
+
+'97.4'.toPercentage() // 97,4%
+'97.4'.toPercentage(pattern: '#,##0') // 97,4%
+'97.4'.toPercentage(locale: 'pt_BR') // 97,4%
+
+'2000.99'.toCurrency() // 2.000,99
+'2000.99'.toCurrency(locale: 'pt_BR') // 2.000,99
+'2000.99'.toCurrency(pattern: '#,##0.00') // 2.000,99
 ```  
