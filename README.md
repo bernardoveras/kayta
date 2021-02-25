@@ -3,9 +3,17 @@
 Package para uso interno na VVS Sistemas
 
 [![pub package](https://img.shields.io/pub/v/kayta.svg?label=kayta&color=blue)](https://pub.dev/packages/kayta)
-<!-- [![likes](https://badges.bar/kayta/likes)](https://pub.dev/packages/kayta/score) -->
-<!-- [![popularity](https://badges.bar/kayta/popularity)](https://pub.dev/packages/kayta/score) -->
+[![likes](https://badges.bar/kayta/likes)](https://pub.dev/packages/kayta/score)
+[![popularity](https://badges.bar/kayta/popularity)](https://pub.dev/packages/kayta/score)
 ![building](https://github.com/bernardoveras/kayta/workflows/build/badge.svg)
+
+  # Guide
+    - [Instalação](#instalação)
+    - [CPF Validator](#cpf-validator)
+    - [CNPJ Validator](#cnpj-validator)
+    - [DateTime Extensions](#datetime-extensions)
+    - [Double Extensions](#double-extensions)
+    - [String Extensions](#string-extensions)
 
 # Instalação
 
