@@ -1,4 +1,4 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:kayta/extensions/date_time_extensions.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
