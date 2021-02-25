@@ -131,3 +131,24 @@ import 'package:kayta/extensions/double_extensions.dart';
 '2000.99'.toCurrency(locale: 'pt_BR') // 2.000,99
 '2000.99'.toCurrency(pattern: '#,##0.00') // 2.000,99
 ```  
+
+## String Extensions
+  
+``` dart  
+// Import package  
+import 'package:kayta/extensions/string_extensions.dart';
+
+/// [Validation's]
+'email@vvssistemas.com'.isValidEmail // true
+'email@vvssistemas'.isValidEmail // false
+
+String value;
+value.ehNuloOuVazio // true
+''.ehNuloOuVazio // true
+
+/// [Generates]
+'usuario:senha'.createBasic64() // dXN1YXJpbzpzZW5oYQ==
+// Se quiser adicionar um prefixo
+// basta informa-lo no argumento
+'usuario:senha'.createBasic64('Basic') // Basic dXN1YXJpbzpzZW5oYQ==
+```  
