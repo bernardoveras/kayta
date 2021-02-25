@@ -4,7 +4,7 @@
 
 [![pub package](https://img.shields.io/pub/v/kayta.svg?label=kayta&color=blue)](https://pub.dev/packages/kayta)
 [![likes](https://badges.bar/kayta/likes)](https://pub.dev/packages/kayta/score)
-[![building](https://github.com/bernardoveras/kayta/workflows/build/badge.svg)
+![building](https://github.com/bernardoveras/kayta/workflows/build/badge.svg)
 
 # Instalação
 
