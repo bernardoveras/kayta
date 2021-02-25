@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kayta/utils/validators/cpf_validator.dart';
+import 'package:kayta/validators/cpf_validator.dart';
 
 void main() {
   test("Test CPF validator", () {
