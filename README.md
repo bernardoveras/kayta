@@ -160,3 +160,26 @@ value.ehNuloOuVazio // true
 // basta informa-lo no argumento
 'usuario:senha'.createBasic64('Basic') // Basic dXN1YXJpbzpzZW5oYQ==
 ```  
+
+## TextField Formatter's
+
+Basta incluir o formatter que você quer que o campo tenha, na lista de `inputFormatters`:
+- `CepInputFormatter()`
+- `CnpjInputFormatter()`
+- `CpfInputFormatter()`
+- `CpfOuCnpjFormatter()`
+- `RealInputFormatter()`
+- `TelefoneInputFormatter()`
+
+**Para garantir que o campo aceite apenas valores numéricos, utilize em conjunto com o formatter `FilteringTextInputFormatter.digitsOnly`**
+``` dart  
+// Import package  
+import 'package:kayta/formatters/cep_input_formatter.dart';
+
+TextFormField(
+  inputFormatters: [
+    FilteringTextInputFormatter.digitsOnly,
+    CepInputFormatter(),
+  ],
+);
+```  
