@@ -6,21 +6,6 @@ extension DateTimeExtension on DateTime {
     return formatter.format(this);
   }
 
-  DateTime proximoDiaUtil() {
-    if (this.weekday == DateTime.saturday) return this.addDays(2);
-    if (this.weekday == DateTime.sunday) return this.addDays(1);
-    if (this.weekday == DateTime.friday) return this.addDays(3);
-    return this.addDays(1);
-  }
-
-  DateTime somenteData() => DateTime(this.year, this.month, this.day);
-
-  DateTime addDays(int days, {bool comHora = true}) {
-    if (comHora == false) return this.somenteData().add(Duration(days: days));
-
-    return this.add(Duration(days: days));
-  }
-
   DateTime copy(
       {int year,
       int month,
@@ -42,6 +27,11 @@ extension DateTimeExtension on DateTime {
     );
   }
 
+  DateTime addDays(int days, {bool comHora = true}) {
+    if (comHora == false) return this.somenteData().add(Duration(days: days));
+    return this.add(Duration(days: days));
+  }
+
   DateTime addMonth([int months = 1]) => this.copy(month: this.month + months);
 
   DateTime primeiroDiaDoMes() => this.copy(day: 1);
@@ -51,4 +41,13 @@ extension DateTimeExtension on DateTime {
     DateTime ultimoDiaDoMes = primeiroDiaDoMes.addMonth().addDays(-1);
     return ultimoDiaDoMes;
   }
+
+  DateTime proximoDiaUtil() {
+    if (this.weekday == DateTime.saturday) return this.addDays(2);
+    if (this.weekday == DateTime.sunday) return this.addDays(1);
+    if (this.weekday == DateTime.friday) return this.addDays(3);
+    return this.addDays(1);
+  }
+
+  DateTime somenteData() => DateTime(this.year, this.month, this.day);
 }

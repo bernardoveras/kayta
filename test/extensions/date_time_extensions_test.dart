@@ -17,6 +17,12 @@ main() {
   });
 
   test('Retornar a data formatada correta', () {
+    String dataFormatada = data.format(format: 'dd/MM');
+
+    expect(dataFormatada, '25/02');
+  });
+
+  test('Retornar a data formatada correta', () {
     String dataFormatada = data.format(format: 'yMMMMEEEEd', locale: 'pt_BR');
 
     expect(

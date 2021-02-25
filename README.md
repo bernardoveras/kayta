@@ -80,3 +80,34 @@ CNPJValidator.generate() // Result: 85137090000110
 // Gerar CNPJ formatado
 CNPJValidator.generate(true) // Result: 85.137.090/0001-10 
 ```  
+
+## DateTime Extension
+  
+``` dart  
+// Import package  
+import 'package:kayta/extensions/date_time_extensions.dart';
+
+
+/// [Format]
+DateTime(2021, 02, 25).format() // 25/02/2021
+
+// Se você quiser um formato específico
+// Basta usar o parâmetro "format"
+DateTime(2021, 02, 25).format(format: 'yMMMMEEEEd') // quinta-feira, 25 de fevereiro de 2021
+
+/// [Add day]
+DateTime(2021, 02, 25).addDays(2)
+
+// Se você quiser a data sem a hora
+// Basta usar o parâmetro "comData"
+DateTime(2021, 02, 25).addDays(2, comHora: false)
+
+
+/// [Add Month]
+DateTime(2021, 02, 25).addMonth(2)
+
+/// [Copy DateTime]
+DateTime date = DateTime(2021, 02, 25) // 25/02/2021
+date.copy(day: 5) // 05/02/2021
+
+```  
