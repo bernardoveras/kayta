@@ -11,18 +11,18 @@ class HttpAdapter implements IHttpClient {
   HttpAdapter(this.client);
 
   @override
-  Future get(String url, {Map<String,String> headers}) {
-    return _request(url, method: HttpMethods.GET, headers: headers);
+  Future get(String url, {Map<String,String> headers, Duration timeout}) {
+    return _request(url, method: HttpMethods.GET, headers: headers, timeout: timeout);
   }
 
   @override
-  Future post(String url, {dynamic body, Map<String,String> headers}) {
-    return _request(url, method: HttpMethods.POST, headers: headers, body: body);
+  Future post(String url, {dynamic body, Map<String,String> headers, Duration timeout}) {
+    return _request(url, method: HttpMethods.POST, headers: headers, body: body, timeout: timeout);
   }
 
   @override
-  Future put(String url, {dynamic body, Map<String,String> headers}) {
-    return _request(url, method: HttpMethods.PUT, headers: headers, body: body);
+  Future put(String url, {dynamic body, Map<String,String> headers, Duration timeout}) {
+    return _request(url, method: HttpMethods.PUT, headers: headers, body: body, timeout: timeout);
   }
 
   Future<dynamic> _request(
@@ -30,6 +30,7 @@ class HttpAdapter implements IHttpClient {
     @required HttpMethods method,
     dynamic body,
     Map<String,String> headers,
+    Duration timeout,
   }) async {
     var response = Response('', 500);
     Future<Response> futureResponse;
@@ -42,7 +43,7 @@ class HttpAdapter implements IHttpClient {
         futureResponse = client.put(url, headers: headers, body: body);
       }
       if (futureResponse != null) {
-        response = await futureResponse.timeout(Duration(seconds: 10));
+        response = await futureResponse.timeout(timeout ?? Duration(seconds: 10));
       }
     } catch (error) {
       throw HttpError.internalError;
