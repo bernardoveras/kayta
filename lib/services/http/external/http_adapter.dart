@@ -54,17 +54,7 @@ class HttpAdapter implements IHttpClient {
         futureResponse = client.put(url, headers: headers, body: body);
       }
       if (futureResponse != null) {
-        var responseBytes =
-            await futureResponse.timeout(timeout ?? Duration(seconds: 10));
-        response = Response.bytes(
-          responseBytes.bodyBytes,
-          responseBytes.statusCode,
-          headers: responseBytes.headers,
-          isRedirect: responseBytes.isRedirect,
-          persistentConnection: responseBytes.persistentConnection,
-          reasonPhrase: responseBytes.reasonPhrase,
-          request: responseBytes.request,
-        );
+        response = await futureResponse.timeout(timeout ?? Duration(seconds: 10));
       }
     } catch (error) {
       throw HttpError.internalError;

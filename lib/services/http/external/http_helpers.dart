@@ -14,16 +14,32 @@ class HttpHelpers {
   static dynamic handleResponse(Response response) {
     switch (response.statusCode) {
       case 200:
-        return response?.body?.isEmpty == true
+        return response?.bodyBytes?.isEmpty == true
             ? null
-            : Response(response.body, 200);
+            : Response.bytes(
+                response.bodyBytes,
+                200,
+                headers: response.headers,
+                isRedirect: response.isRedirect,
+                persistentConnection: response.persistentConnection,
+                reasonPhrase: response.reasonPhrase,
+                request: response.request,
+              );
       case 204:
         return null;
       case 400:
-        if (response?.body?.isEmpty == true) {
+        if (response?.bodyBytes?.isEmpty == true) {
           throw HttpError.badRequest;
         } else {
-          return Response(response.body, 400);
+          return Response.bytes(
+            response.bodyBytes,
+            400,
+            headers: response.headers,
+            isRedirect: response.isRedirect,
+            persistentConnection: response.persistentConnection,
+            reasonPhrase: response.reasonPhrase,
+            request: response.request,
+          );
         }
         break;
       case 401:
