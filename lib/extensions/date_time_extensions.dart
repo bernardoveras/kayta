@@ -34,7 +34,7 @@ extension DateTimeExtension on DateTime {
 
   DateTime addMonth([int months = 1]) => this.copy(month: this.month + months);
 
-  DateTime primeiroDiaDoMes() => this.copy(day: 1);
+  DateTime primeiroDiaDoMes() => DateTime(this.year, this.month);
 
   DateTime ultimoDiaDoMes() {
     DateTime primeiroDiaDoMes = this.primeiroDiaDoMes();

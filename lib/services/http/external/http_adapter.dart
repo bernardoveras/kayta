@@ -11,28 +11,39 @@ class HttpAdapter implements IHttpClient {
   HttpAdapter(this.client);
 
   @override
-  Future get(String url, {Map<String,String> headers, Duration timeout}) {
-    return _request(url, method: HttpMethods.GET, headers: headers, timeout: timeout);
+  Future get(String url, {Map<String, String> headers, Duration timeout}) {
+    return _request(url,
+        method: HttpMethods.GET, headers: headers, timeout: timeout);
   }
 
   @override
-  Future post(String url, {dynamic body, Map<String,String> headers, Duration timeout}) {
-    return _request(url, method: HttpMethods.POST, headers: headers, body: body, timeout: timeout);
+  Future post(String url,
+      {dynamic body, Map<String, String> headers, Duration timeout}) {
+    return _request(url,
+        method: HttpMethods.POST,
+        headers: headers,
+        body: body,
+        timeout: timeout);
   }
 
   @override
-  Future put(String url, {dynamic body, Map<String,String> headers, Duration timeout}) {
-    return _request(url, method: HttpMethods.PUT, headers: headers, body: body, timeout: timeout);
+  Future put(String url,
+      {dynamic body, Map<String, String> headers, Duration timeout}) {
+    return _request(url,
+        method: HttpMethods.PUT,
+        headers: headers,
+        body: body,
+        timeout: timeout);
   }
 
   Future<dynamic> _request(
     String url, {
     @required HttpMethods method,
     dynamic body,
-    Map<String,String> headers,
+    Map<String, String> headers,
     Duration timeout,
   }) async {
-    var response = Response('', 500);
+    var response = Response.bytes([], 500);
     Future<Response> futureResponse;
     try {
       if (method == HttpMethods.POST) {
@@ -43,7 +54,17 @@ class HttpAdapter implements IHttpClient {
         futureResponse = client.put(url, headers: headers, body: body);
       }
       if (futureResponse != null) {
-        response = await futureResponse.timeout(timeout ?? Duration(seconds: 10));
+        var responseBytes =
+            await futureResponse.timeout(timeout ?? Duration(seconds: 10));
+        response = Response.bytes(
+          responseBytes.bodyBytes,
+          responseBytes.statusCode,
+          headers: responseBytes.headers,
+          isRedirect: responseBytes.isRedirect,
+          persistentConnection: responseBytes.persistentConnection,
+          reasonPhrase: responseBytes.reasonPhrase,
+          request: responseBytes.request,
+        );
       }
     } catch (error) {
       throw HttpError.internalError;

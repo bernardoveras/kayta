@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+/// Kayta extensions on [String].
 extension StringExtensions on String {
   bool get ehNuloOuVazio {
     return this != null && this != "" ? false : true;
