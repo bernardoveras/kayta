@@ -22,6 +22,7 @@ class KaytaTextField extends StatefulWidget {
   final TextInputAction textInputAction;
   final List<TextInputFormatter> inputFormatters;
   final TextEditingController controller;
+  final TextAlign textAlign;
 
   KaytaTextField({
     this.controller,
@@ -41,6 +42,7 @@ class KaytaTextField extends StatefulWidget {
     this.onFieldSubmitted,
     this.errorText,
     this.initialValue,
+    this.textAlign = TextAlign.start,
   });
 
   @override
@@ -77,6 +79,7 @@ class _KaytaTextFieldState extends State<KaytaTextField> {
           onChanged: widget.onChanged,
           style: widget.style,
           controller: widget.controller,
+          textAlign: widget.textAlign,
           autocorrect: false,
           enableSuggestions: false,
           cursorColor: Theme.of(context).primaryColor,
