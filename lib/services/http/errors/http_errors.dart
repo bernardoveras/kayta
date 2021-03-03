@@ -6,4 +6,5 @@ enum HttpError {
   networkError,
   internalError,
   invalidData,
+  addressError
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:kayta/services/http/errors/http_errors.dart';
@@ -54,7 +56,12 @@ class HttpAdapter implements IHttpClient {
         futureResponse = client.put(url, headers: headers, body: body);
       }
       if (futureResponse != null) {
-        response = await futureResponse.timeout(timeout ?? Duration(seconds: 10));
+        response =
+            await futureResponse.timeout(timeout ?? Duration(seconds: 10));
+      }
+    } on SocketException catch (error) {
+      if (error?.osError?.message == "No address associated with hostname") {
+        throw HttpError.addressError;
       }
     } catch (error) {
       throw HttpError.internalError;
