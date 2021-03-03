@@ -60,9 +60,10 @@ class HttpAdapter implements IHttpClient {
             await futureResponse.timeout(timeout ?? Duration(seconds: 10));
       }
     } on SocketException catch (error) {
-      if (error?.osError?.message == "No address associated with hostname") {
+      if (error?.osError?.errorCode == 111 || error?.osError?.errorCode == 7) {
         throw HttpError.addressError;
       }
+      throw HttpError.networkError;
     } catch (error) {
       throw HttpError.internalError;
     }
