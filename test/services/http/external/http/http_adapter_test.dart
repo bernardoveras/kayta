@@ -4,7 +4,7 @@ import 'package:kayta/services/http/external/http_adapter.dart';
 import 'package:mocktail/mocktail.dart';
 // import 'package:mockito/mockito.dart';
 
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 class ClientSpy extends Mock implements Client {}
 

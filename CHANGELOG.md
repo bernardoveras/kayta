@@ -1,3 +1,20 @@
+## [1.0.1] Big Update!
+
+- Somos Null-Safety!
+ * O package foi migrado totalmente para Null-Safety!
+
+- Adicionado novos validator's
+  * CPFValidator: Validação de CPF.
+  * CNPJValidator: Validação de CNPJ.
+
+- Adicionado novos formatter's para TextField
+  * CepInputFormatter: Formatter para TextField de CEP.
+  * CpfInputFormatter: Formatter para TextField de CPF.
+  * CpfOuCnpjFormatter: Formatter para TextField de CPF ou CNPJ.
+  * CnpjInputFormatter: Formatter para TextField de CNPJ.
+  * TelefoneInputFormatter: Formatter para TextField de Telefone.
+  * RealInputFormatter: Formatter para TextField de Real (currency).
+
 ## [1.0.0]
 
 - Adicionado novos componentes Kayta
@@ -38,20 +55,3 @@
 - Http Service:
   * Testes: O Http está todo testado, tendo uma segurança a mais.
   * Erros: O Http tem tratamento de erros com enum de Erros.
-
-  ## [1.0.1] Big Update!
-
-- Somos Null-Safety!
- * O package foi migrado totalmente para Null-Safety!
-
-- Adicionado novos validator's
-  * CPFValidator: Validação de CPF.
-  * CNPJValidator: Validação de CNPJ.
-
-- Adicionado novos formatter's para TextField
-  * CepInputFormatter: Formatter para TextField de CEP.
-  * CpfInputFormatter: Formatter para TextField de CPF.
-  * CpfOuCnpjFormatter: Formatter para TextField de CPF ou CNPJ.
-  * CnpjInputFormatter: Formatter para TextField de CNPJ.
-  * TelefoneInputFormatter: Formatter para TextField de Telefone.
-  * RealInputFormatter: Formatter para TextField de Real (currency).
