@@ -1,34 +1,64 @@
-#The name of your workflow.
 name: build
-# Trigger the workflow on push or pull request
+
 on:
+  # Run on PRs and pushes to the default branch.
   push:
-    branches: [master]
+    branches: [ master ]
   pull_request:
-    branches: [master]
-#A workflow run is made up of one or more jobs. Jobs run in parallel by default.
+    branches: [ master ]
+  schedule:
+    - cron: "0 0 * * 0"
+
+env:
+  PUB_ENVIRONMENT: bot.github
+
 jobs:
-  test:
-    #The type of machine to run the job on. [windows,macos, ubuntu , self-hosted]
-    defaults:
-      run:
-        working-directory: ./
+  # Check code formatting and static analysis on a single OS (linux)
+  # against Dart dev.
+  analyze:
     runs-on: ubuntu-latest
-    #sequence of tasks called
+    strategy:
+      fail-fast: false
+      matrix:
+        sdk: [dev]
     steps:
-      # The branch or tag ref that triggered the workflow will be checked out.
-      # https://github.com/actions/checkout
-      - uses: actions/checkout@v1
-      # Setup a flutter environment.
-      # https://github.com/marketplace/actions/flutter-action
-      - uses: subosito/flutter-action@v1
+      - uses: actions/checkout@v2
+      - uses: dart-lang/setup-dart@v0.3
         with:
-          flutter-version: "1.22.3"
-          channel: "stable"
-      - run: flutter pub get
-      #- run: flutter analyze
-      # run  flutter widgets tests  and unit tests
-      - run: flutter test --coverage
-      # Upload coverage reports to Codecov
-      # https://github.com/marketplace/actions/codecov
-      - uses: codecov/codecov-action@v1.0.7
+          sdk: ${{ matrix.sdk }}
+      - id: install
+        name: Install dependencies
+        run: dart pub get
+      - name: Check formatting
+        run: dart format --output=none --set-exit-if-changed .
+        if: always() && steps.install.outcome == 'success'
+      - name: Analyze code
+        run: dart analyze --fatal-infos
+        if: always() && steps.install.outcome == 'success'
+
+  # Run tests on a matrix consisting of two dimensions:
+  # 1. OS: ubuntu-latest, (macos-latest, windows-latest)
+  # 2. release channel: dev
+  test:
+    needs: analyze
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # Add macos-latest and/or windows-latest if relevant for this package.
+        os: [ubuntu-latest]
+        sdk: [dev]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dart-lang/setup-dart@v0.3
+        with:
+          sdk: ${{ matrix.sdk }}
+      - id: install
+        name: Install dependencies
+        run: dart pub get
+      - name: Run VM tests
+        run: dart test --platform vm
+        if: always() && steps.install.outcome == 'success'
+      - name: Run Chrome tests
+        run: dart test --platform chrome
+        if: always() && steps.install.outcome == 'success'
