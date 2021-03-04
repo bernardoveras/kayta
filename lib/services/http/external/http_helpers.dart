@@ -14,7 +14,7 @@ class HttpHelpers {
   static dynamic handleResponse(Response response) {
     switch (response.statusCode) {
       case 200:
-        return response?.bodyBytes?.isEmpty == true
+        return response.bodyBytes.isEmpty == true
             ? null
             : Response.bytes(
                 response.bodyBytes,
@@ -28,7 +28,7 @@ class HttpHelpers {
       case 204:
         return null;
       case 400:
-        if (response?.bodyBytes?.isEmpty == true) {
+        if (response.bodyBytes.isEmpty == true) {
           throw HttpError.badRequest;
         } else {
           return Response.bytes(
@@ -41,7 +41,6 @@ class HttpHelpers {
             request: response.request,
           );
         }
-        break;
       case 401:
         throw HttpError.unauthorized;
       case 403:

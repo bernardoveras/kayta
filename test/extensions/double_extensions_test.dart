@@ -1,8 +1,10 @@
+
+
 import 'package:test/test.dart';
 import 'package:kayta/extensions/double_extensions.dart';
 
 main() {
-  double value;
+  late double value;
 
   setUp((){
     value = 22350.99;

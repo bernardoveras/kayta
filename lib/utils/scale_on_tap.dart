@@ -2,20 +2,20 @@ import 'package:flutter/physics.dart';
 import 'package:flutter/widgets.dart';
 
 class ScaleOnTap extends StatefulWidget {
-  final Function() onTap;
-  final Function() onLongPress;
-  final Function() onDoubleTap;
+  final Function()? onTap;
+  final Function()? onLongPress;
+  final Function()? onDoubleTap;
   final Widget child;
-  final Duration duration;
-  final double scaleMinValue;
-  final Curve scaleCurve;
-  final Curve opacityCurve;
-  final double opacityMinValue;
+  final Duration? duration;
+  final double? scaleMinValue;
+  final Curve? scaleCurve;
+  final Curve? opacityCurve;
+  final double? opacityMinValue;
 
   ScaleOnTap({
-    @required this.onTap,
+    required this.onTap,
     this.onLongPress,
-    @required this.child,
+    required this.child,
     this.onDoubleTap,
     this.duration = const Duration(milliseconds: 250),
     this.scaleMinValue = 0.96,
@@ -30,9 +30,9 @@ class ScaleOnTap extends StatefulWidget {
 
 class _ScaleTapState extends State<ScaleOnTap>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation<double> _scale;
-  Animation<double> _opacity;
+  late AnimationController _animationController;
+  late Animation<double> _scale;
+  late Animation<double> _opacity;
 
   @override
   void initState() {
@@ -51,7 +51,7 @@ class _ScaleTapState extends State<ScaleOnTap>
 
   @override
   void dispose() {
-    _animationController?.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -67,8 +67,8 @@ class _ScaleTapState extends State<ScaleOnTap>
     return widget.duration ?? Duration(milliseconds: 300);
   }
 
-  Future<void> anim({double scale, double opacity, Duration duration}) {
-    _animationController?.stop();
+  Future<void> anim({double? scale, double? opacity, Duration? duration}) {
+    _animationController.stop();
     _animationController.duration = duration ?? Duration.zero;
 
     _scale = Tween<double>(
@@ -85,8 +85,8 @@ class _ScaleTapState extends State<ScaleOnTap>
       curve: _computedOpacityCurve,
       parent: _animationController,
     ));
-    _animationController?.reset();
-    return _animationController?.forward();
+    _animationController.reset();
+    return _animationController.forward();
   }
 
   Future<void> _onTapDown(_) {
@@ -109,7 +109,7 @@ class _ScaleTapState extends State<ScaleOnTap>
     return _onTapUp(_);
   }
 
-  Widget _container({Widget child}) {
+  Widget _container({required Widget child}) {
     if (widget.onTap != null || widget.onLongPress != null) {
       return Listener(
         onPointerDown: _onTapDown,
@@ -132,7 +132,7 @@ class _ScaleTapState extends State<ScaleOnTap>
     return _container(
       child: AnimatedBuilder(
         animation: _animationController,
-        builder: (_, Widget child) {
+        builder: (_, child) {
           return Opacity(
             opacity: _opacity.value,
             child: Transform.scale(

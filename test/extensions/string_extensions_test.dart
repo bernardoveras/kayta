@@ -3,8 +3,8 @@ import 'package:test/test.dart';
 import 'package:kayta/extensions/string_extensions.dart';
 
 main() {
-  String email;
-  String stringValue;
+  late String email;
+  late String? stringValue;
 
   setUp(() {
     stringValue = 'usuario:senha';
@@ -16,10 +16,6 @@ main() {
 
   test('Retornar FALSE caso o e-mail for inválido', () {
     email = 'teste@teste';
-
-    expect(email.isValidEmail, false);
-    
-    email = null;
 
     expect(email.isValidEmail, false);
   });
@@ -40,7 +36,7 @@ main() {
 
   test('Retornar booleano na validação do texto corretamente', () {
     expect(stringValue.ehNuloOuVazio, false);
-    
+
     stringValue = null;
     expect(stringValue.ehNuloOuVazio, true);
 

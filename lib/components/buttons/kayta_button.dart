@@ -4,26 +4,26 @@ import 'package:kayta/utils/scale_on_tap.dart';
 
 class KaytaButton extends StatelessWidget {
   final String text;
-  final String image;
-  final Function onTap;
-  final Function onLongPress;
-  final Function onDoubleTap;
-  final BorderRadius borderRadius;
-  final TextStyle textStyle;
-  final double iconSize;
-  final double width;
-  final double height;
-  final double outlineWidth;
-  final Color color;
-  final Color textColor;
-  final bool disabled;
-  final bool outline;
-  final bool invertColors;
-  final bool isLoading;
+  final String? image;
+  final Function()? onTap;
+  final Function()? onLongPress;
+  final Function()? onDoubleTap;
+  final BorderRadius? borderRadius;
+  final TextStyle? textStyle;
+  final double? iconSize;
+  final double? width;
+  final double? height;
+  final double? outlineWidth;
+  final Color? color;
+  final Color? textColor;
+  final bool? disabled;
+  final bool? outline;
+  final bool? invertColors;
+  final bool? isLoading;
 
-   KaytaButton(
+  KaytaButton(
     this.text, {
-    @required this.onTap,
+    required this.onTap,
     this.image,
     this.height = 45,
     this.color,
@@ -39,7 +39,7 @@ class KaytaButton extends StatelessWidget {
     this.textColor,
     this.textStyle,
     this.outlineWidth = 2,
-  }):assert(text != null, "O parâmetro text não pode ser nulo");
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +53,20 @@ class KaytaButton extends StatelessWidget {
         height: height,
         padding: EdgeInsets.zero,
         decoration: BoxDecoration(
-          color: invertColors ? Colors.white : outline ? Colors.transparent : color != null ? color : onTap == null || disabled ? Colors.grey[300]: Theme.of(context).primaryColor,
+          color: invertColors == true
+              ? Colors.white
+              : outline == true
+                  ? Colors.transparent
+                  : color != null
+                      ? color
+                      : onTap == null || disabled == true
+                          ? Colors.grey[300]
+                          : Theme.of(context).primaryColor,
           borderRadius: borderRadius ?? BorderRadius.circular(8),
-          border: outline
-              ? Border.all(color: color ?? Theme.of(context).primaryColor, width: outlineWidth)
+          border: outline == true
+              ? Border.all(
+                  color: color ?? Theme.of(context).primaryColor,
+                  width: outlineWidth ?? 1.0)
               : null,
         ),
         child: Row(
@@ -77,12 +87,16 @@ class KaytaButton extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         fontSize: MediaQuery.of(context).size.height * 0.02,
                       ),
-
                 ),
               ),
             ),
-            SizedBox(width: isLoading ? 10 : 0),
-            isLoading ? KaytaCircularProgress(color: Colors.white, size:  MediaQuery.of(context).size.height * 0.02, lineWidth: 2) :SizedBox(),
+            SizedBox(width: isLoading == true ? 10 : 0),
+            isLoading == true 
+                ? KaytaCircularProgress(
+                    color: Colors.white,
+                    size: MediaQuery.of(context).size.height * 0.02,
+                    lineWidth: 2)
+                : SizedBox(),
           ],
         ),
       ),
@@ -90,9 +104,9 @@ class KaytaButton extends StatelessWidget {
   }
 
   Color setTextColor(BuildContext context) {
-    if (invertColors) return Theme.of(context).primaryColor;
+    if (invertColors == true) return Theme.of(context).primaryColor;
 
-    if (outline) return textColor ?? Theme.of(context).primaryColor;
+    if (outline == true) return textColor ?? Theme.of(context).primaryColor;
 
     if (color == Colors.black) return Colors.white;
 
@@ -100,14 +114,14 @@ class KaytaButton extends StatelessWidget {
   }
 
   Color setBackgroundColor(BuildContext context) {
-    if (invertColors) return Colors.white;
+    if (invertColors == true) return Colors.white;
 
-    if (outline) return Colors.transparent;
+    if (outline == true) return Colors.transparent;
 
-    if (color != null) return color;
+    if (color != null) return color!;
 
-    return onTap == null || disabled
-        ? Colors.grey[300]
+    return onTap == null || disabled == true
+        ? Colors.grey[300]!
         : Theme.of(context).primaryColor;
   }
 }

@@ -1,3 +1,5 @@
+
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kayta/validators/cnpj_validator.dart';
 
@@ -11,7 +13,6 @@ void main() {
     expect(CNPJValidator.isValid("17942159000127"), false);
     expect(CNPJValidator.isValid("017942159000128"), false);
     expect(CNPJValidator.isValid(""), false);
-    expect(CNPJValidator.isValid(null), false);
 
     List<String> blackListed = [
       "00000000000000",

@@ -5,23 +5,23 @@ import 'package:kayta/utils/scale_on_tap.dart';
 
 // ignore: must_be_immutable
 class KaytaTextField extends StatefulWidget {
-  final String hintText;
-  final String errorText;
-  final String initialValue;
-  final TextStyle hintStyle;
-  final TextStyle style;
-  final Color iconColor;
-  final bool autocorrect;
-  final bool enableSuggestions;
+  final String? hintText;
+  final String? errorText;
+  final String? initialValue;
+  final TextStyle? hintStyle;
+  final TextStyle? style;
+  final Color? iconColor;
+  final bool? autocorrect;
+  final bool? enableSuggestions;
   final bool obscure;
-  final Function(String) onChanged;
-  final Function(String) onFieldSubmitted;
-  final IconData leftIcon;
-  final FocusNode focusNode;
-  final TextInputType keyboardType;
-  final TextInputAction textInputAction;
-  final List<TextInputFormatter> inputFormatters;
-  final TextEditingController controller;
+  final Function(String?)? onChanged;
+  final Function(String?)? onFieldSubmitted;
+  final IconData? leftIcon;
+  final FocusNode? focusNode;
+  final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextEditingController? controller;
   final TextAlign textAlign;
 
   KaytaTextField({
@@ -50,7 +50,7 @@ class KaytaTextField extends StatefulWidget {
 }
 
 class _KaytaTextFieldState extends State<KaytaTextField> {
-  bool showPass;
+  late bool showPass;
 
   @override
   void initState() {
@@ -61,13 +61,13 @@ class _KaytaTextFieldState extends State<KaytaTextField> {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      clipBehavior: Clip.none,
       alignment: Alignment.bottomLeft,
-      overflow: Overflow.visible,
       children: [
         widget.errorText != null
             ? Positioned(
                 child: Text(
-                  widget.errorText,
+                  widget.errorText ?? '',
                   style: TextStyle(
                     color: Colors.red,
                   ),

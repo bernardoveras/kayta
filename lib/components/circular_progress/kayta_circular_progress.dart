@@ -4,39 +4,40 @@ import 'package:flutter/widgets.dart';
 
 class KaytaCircularProgress extends StatefulWidget {
   const KaytaCircularProgress({
-    Key key,
-    @required this.color,
+    Key? key,
+    required this.color,
     this.lineWidth = 7.0,
     this.size = 50.0,
     this.duration = const Duration(milliseconds: 1200),
     this.controller,
-  })  : assert(color != null),
-        assert(size != null),
-        super(key: key);
+  }) : super(key: key);
 
   final Color color;
   final double lineWidth;
   final double size;
   final Duration duration;
-  final AnimationController controller;
+  final AnimationController? controller;
 
   @override
   _KaytaCircularProgressState createState() => _KaytaCircularProgressState();
 }
 
-class _KaytaCircularProgressState extends State<KaytaCircularProgress> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _animation;
+class _KaytaCircularProgressState extends State<KaytaCircularProgress>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
 
-    _controller = (widget.controller ?? AnimationController(vsync: this, duration: widget.duration))
+    _controller = (widget.controller ??
+        AnimationController(vsync: this, duration: widget.duration))
       ..addListener(() => setState(() {}))
       ..repeat();
-    _animation = Tween(begin: 0.0, end: 1.0)
-        .animate(CurvedAnimation(parent: _controller, curve: const Interval(0.0, 1.0, curve: Curves.linear)));
+    _animation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 1.0, curve: Curves.linear)));
   }
 
   @override
@@ -49,11 +50,13 @@ class _KaytaCircularProgressState extends State<KaytaCircularProgress> with Sing
   Widget build(BuildContext context) {
     return Center(
       child: Transform(
-        transform: Matrix4.identity()..rotateZ((_animation.value) * math.pi * 2),
+        transform: Matrix4.identity()
+          ..rotateZ((_animation.value) * math.pi * 2),
         alignment: FractionalOffset.center,
         child: CustomPaint(
           child: SizedBox.fromSize(size: Size.square(widget.size)),
-          painter: _KaytaCircularProgressPainter(paintWidth: widget.lineWidth, color: widget.color),
+          painter: _KaytaCircularProgressPainter(
+              paintWidth: widget.lineWidth, color: widget.color),
         ),
       ),
     );
@@ -61,7 +64,8 @@ class _KaytaCircularProgressState extends State<KaytaCircularProgress> with Sing
 }
 
 class _KaytaCircularProgressPainter extends CustomPainter {
-  _KaytaCircularProgressPainter({this.angle = 90.0, double paintWidth, Color color})
+  _KaytaCircularProgressPainter(
+      {this.angle = 90.0, required double paintWidth, required Color color})
       : ringPaint = Paint()
           ..color = color
           ..strokeWidth = paintWidth

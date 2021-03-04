@@ -1,21 +1,23 @@
+
+
 import 'package:intl/intl.dart';
 import 'package:kayta/enums/units.dart';
 
 extension DateTimeExtension on DateTime {
-  String format({String format = 'dd/MM/yyyy', String locale}) {
+  String format({String format = 'dd/MM/yyyy', String? locale}) {
     DateFormat formatter = DateFormat(format, locale);
     return formatter.format(this);
   }
 
   DateTime copy(
-      {int year,
-      int month,
-      int day,
-      int hour,
-      int minute,
-      int second,
-      int millisecond,
-      int microsecond}) {
+      {int? year,
+      int? month,
+      int? day,
+      int? hour,
+      int? minute,
+      int? second,
+      int? millisecond,
+      int? microsecond}) {
     return DateTime(
       year ?? this.year,
       month ?? this.month,

@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/services.dart';
 
 /// Formata o valor do campo com a mascara ( 9.999.999.999,00 ).

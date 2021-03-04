@@ -1,3 +1,5 @@
+
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kayta/validators/cpf_validator.dart';
 
@@ -12,7 +14,6 @@ void main() {
     expect(CPFValidator.isValid("57abc803.6586-52", false), false);
     expect(CPFValidator.isValid("03.3461.67100-2"), false);
     expect(CPFValidator.isValid(""), false);
-    expect(CPFValidator.isValid(null), false);
 
     List<String> blackListed = [
       "00000000000",

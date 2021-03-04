@@ -4,10 +4,15 @@ import 'package:kayta/utils/shimmer/shimmer.dart';
 class ShimmerContainer extends StatelessWidget {
   final double height;
   final double width;
-  final Color color;
-  final double radius;
+  final Color? color;
+  final BorderRadiusGeometry? radius;
 
-  const ShimmerContainer({this.height, this.width, this.color, this.radius = 3});
+  const ShimmerContainer({
+    required this.height,
+    required this.width,
+    this.color = Colors.white,
+    this.radius,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +21,8 @@ class ShimmerContainer extends StatelessWidget {
         height: height,
         width: width,
         decoration: BoxDecoration(
-          color: color ?? Colors.white,
-          borderRadius: BorderRadius.circular(radius),
+          color: color,
+          borderRadius: radius ?? BorderRadius.circular(3),
         ),
       ),
     );

@@ -1,10 +1,12 @@
+
+
 import 'package:kayta/enums/units.dart';
 import 'package:test/test.dart';
 import 'package:kayta/extensions/date_time_extensions.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 main() {
-  DateTime data;
+  late DateTime data;
 
   setUp(() {
     initializeDateFormatting('pt_BR');

@@ -39,7 +39,10 @@
   * Testes: O Http está todo testado, tendo uma segurança a mais.
   * Erros: O Http tem tratamento de erros com enum de Erros.
 
-  ## [1.0.1]
+  ## [1.0.1] Big Update!
+
+- Somos Null-Safety!
+ * O package foi migrado totalmente para Null-Safety!
 
 - Adicionado novos validator's
   * CPFValidator: Validação de CPF.

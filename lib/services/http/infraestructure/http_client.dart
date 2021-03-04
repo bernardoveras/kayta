@@ -1,5 +1,7 @@
+
+
 abstract class IHttpClient {
-  Future<dynamic> get(String url, {Map<String,String> headers, Duration timeout});
-  Future<dynamic> post(String url, {dynamic body, Map<String,String> headers, Duration timeout});
-  Future<dynamic> put(String url, {dynamic body, Map<String,String> headers, Duration timeout});
+  Future<dynamic> get(Uri url, {Map<String,String> headers, Duration timeout});
+  Future<dynamic> post(Uri url, {dynamic body, Map<String,String> headers, Duration timeout});
+  Future<dynamic> put(Uri url, {dynamic body, Map<String,String> headers, Duration timeout});
 }
