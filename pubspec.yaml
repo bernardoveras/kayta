@@ -1,11 +1,10 @@
 name: kayta
-version: 1.0.0
+version: 1.0.1
 description: Kayta by Bernardo Veras
 homepage: https://vvssistemas.com.br/
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
-  flutter: ">=1.17.0"
 
 dependencies:
   http: 0.13.0
