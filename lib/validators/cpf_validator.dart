@@ -47,7 +47,6 @@ class CPFValidator {
 
   static String strip(String cpf) {
     RegExp regExp = RegExp(STRIP_REGEX);
-    cpf = cpf == null ? "" : cpf;
 
     return cpf.replaceAll(regExp, "");
   }
@@ -58,7 +57,7 @@ class CPFValidator {
     }
 
     // CPF must be defined
-    if (cpf == null || cpf.isEmpty) {
+    if (cpf.isEmpty) {
       return false;
     }
 

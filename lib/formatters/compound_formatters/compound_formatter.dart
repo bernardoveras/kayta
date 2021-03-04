@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/services.dart';
 import 'package:kayta/formatters/compoundable_formatter.dart';
 
@@ -11,8 +9,7 @@ class CompoundFormatter extends TextInputFormatter {
   final List<CompoundableFormatter> _formatters;
 
   CompoundFormatter(this._formatters)
-      : assert(_formatters != null),
-        assert(_formatters.isNotEmpty),
+      : assert(_formatters.isNotEmpty),
         assert(_formatters.length > 1);
 
   @override
