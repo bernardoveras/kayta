@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kayta/utils/shimmer/shimmer.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ShimmerContainer extends StatelessWidget {
   final double height;
@@ -16,7 +16,10 @@ class ShimmerContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Shimmer(
+    return Shimmer.fromColors(
+      baseColor: Colors.black12,
+      highlightColor: Colors.white,
+      // loop: 3,
       child: Container(
         height: height,
         width: width,

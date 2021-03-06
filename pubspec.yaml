@@ -1,5 +1,5 @@
 name: kayta
-version: 1.0.1
+version: 1.0.2
 description: Kayta by Bernardo Veras
 homepage: https://vvssistemas.com.br/
 
@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  shimmer: ^2.0.0-nullsafety.0
   http: ^0.13.0
   auto_size_text: ^3.0.0-nullsafety.0
   intl: ^0.17.0
