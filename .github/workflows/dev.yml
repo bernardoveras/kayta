@@ -6,6 +6,9 @@ on:
       - dev
 
 jobs:
+  defaults:
+    run:
+    working-directory: ./
   build-and-deploy:
     runs-on: ubuntu-latest
 

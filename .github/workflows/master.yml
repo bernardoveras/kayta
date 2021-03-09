@@ -6,6 +6,9 @@ on:
       - master
 
 jobs:
+  defaults:
+    run:
+    working-directory: ./
   build-and-deploy:
     runs-on: ubuntu-latest
 
@@ -23,6 +26,3 @@ jobs:
     
     - name: Test
       run: flutter test --coverage
-
-    # - name: Publish Package
-    #   run: pub publish
