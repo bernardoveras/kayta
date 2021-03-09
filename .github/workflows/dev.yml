@@ -1,0 +1,28 @@
+name: Build and deploy package
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses : actions/checkout@master
+
+    - name: Set up Flutter
+    - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: "2.0.1"
+          channel: "stable"
+
+    - name: Build package
+      run: flutter pub get
+    
+    - name: Test
+      run: flutter test --coverage
+
+    # - name: Publish Package
+    #   run: pub publish
