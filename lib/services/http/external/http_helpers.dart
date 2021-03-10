@@ -1,5 +1,6 @@
 import 'package:http/http.dart';
-import 'package:kayta/services/http/errors/http_errors.dart';
+import 'package:kayta/errors/errors.dart';
+import 'package:kayta/errors/http_errors.dart';
 import 'package:kayta/extensions/string_extensions.dart';
 
 class HttpHelpers {
@@ -29,7 +30,10 @@ class HttpHelpers {
         return null;
       case 400:
         if (response.bodyBytes.isEmpty == true) {
-          throw HttpError.badRequest;
+          throw GenericError(
+            message: response.body,
+            type: HttpError.badRequest,
+          );
         } else {
           return Response.bytes(
             response.bodyBytes,
@@ -42,15 +46,31 @@ class HttpHelpers {
           );
         }
       case 401:
+        throw GenericError(
+          message: response.body,
+          type: HttpError.unauthorized,
+        );
         throw HttpError.unauthorized;
       case 403:
-        throw HttpError.forbidden;
+        throw GenericError(
+          message: response.body,
+          type: HttpError.forbidden,
+        );
+
       case 404:
-        throw HttpError.notFound;
+        throw GenericError(
+          message: response.body,
+          type: HttpError.notFound,
+        );
       case 500:
-        throw HttpError.internalError;
+        throw GenericError(
+          message: response.body,
+          type: HttpError.internalError,
+        );
       default:
-        throw HttpError.internalError;
+        throw GenericError(
+          type: HttpError.internalError,
+        );
     }
   }
 

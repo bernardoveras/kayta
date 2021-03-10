@@ -6,7 +6,8 @@ on:
       - master
 
 jobs:
-  defaults:
+  build-and-deploy:
+    defaults:
       run:
         working-directory: ./
     runs-on: ubuntu-latest
