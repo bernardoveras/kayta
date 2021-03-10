@@ -1,5 +1,6 @@
 import 'package:http/http.dart';
-import 'package:kayta/services/http/errors/http_errors.dart';
+import 'package:kayta/errors/errors.dart';
+import 'package:kayta/errors/http_errors.dart';
 import 'package:kayta/services/http/external/http_adapter.dart';
 import 'package:mocktail/mocktail.dart';
 // import 'package:mockito/mockito.dart';
@@ -87,9 +88,9 @@ void main() {
     test('Should return BadRequestError if post returns 400', () async {
       mockResponse(400, body: '');
 
-      final future = sut.post(url);
-
-      expect(future, throwsA(HttpError.badRequest));
+      sut.post(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.badRequest);
+      });
     });
 
     test('Should return BadRequestError if post returns 400 with data',
@@ -104,41 +105,41 @@ void main() {
     test('Should return UnauthorizedError if post returns 401', () async {
       mockResponse(401);
 
-      final future = sut.post(url);
-
-      expect(future, throwsA(HttpError.unauthorized));
+      sut.post(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.unauthorized);
+      });
     });
 
     test('Should return ForbiddenError if post returns 403', () async {
       mockResponse(403);
 
-      final future = sut.post(url);
-
-      expect(future, throwsA(HttpError.forbidden));
+      sut.post(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.forbidden);
+      });
     });
 
     test('Should return NotFoundError if post returns 404', () async {
       mockResponse(404);
 
-      final future = sut.post(url);
-
-      expect(future, throwsA(HttpError.notFound));
+      sut.post(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.notFound);
+      });
     });
 
     test('Should return InternalError if post returns 500', () async {
       mockResponse(500);
 
-      final future = sut.post(url);
-
-      expect(future, throwsA(HttpError.internalError));
+      sut.post(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.internalError);
+      });
     });
 
     test('Should return InternalError if post throws', () async {
       mockError();
 
-      final future = sut.post(url);
-
-      expect(future, throwsA(HttpError.internalError));
+      sut.post(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.internalError);
+      });
     });
   });
 
@@ -203,9 +204,9 @@ void main() {
     test('Should return BadRequestError if get returns 400', () async {
       mockResponse(400, body: '');
 
-      final future = sut.get(url);
-
-      expect(future, throwsA(HttpError.badRequest));
+      sut.get(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.badRequest);
+      });
     });
 
     test('Should return BadRequestError if get returns 400', () async {
@@ -219,41 +220,41 @@ void main() {
     test('Should return UnauthorizedError if get returns 401', () async {
       mockResponse(401);
 
-      final future = sut.get(url);
-
-      expect(future, throwsA(HttpError.unauthorized));
+      sut.get(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.unauthorized);
+      });
     });
 
     test('Should return ForbiddenError if get returns 403', () async {
       mockResponse(403);
 
-      final future = sut.get(url);
-
-      expect(future, throwsA(HttpError.forbidden));
+      sut.get(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.forbidden);
+      });
     });
 
     test('Should return NotFoundError if get returns 404', () async {
       mockResponse(404);
 
-      final future = sut.get(url);
-
-      expect(future, throwsA(HttpError.notFound));
+      sut.get(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.notFound);
+      });
     });
 
     test('Should return InternalError if get returns 500', () async {
       mockResponse(500);
 
-      final future = sut.get(url);
-
-      expect(future, throwsA(HttpError.internalError));
+      sut.get(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.internalError);
+      });
     });
 
     test('Should return InternalError if get throws', () async {
       mockError();
 
-      final future = sut.get(url);
-
-      expect(future, throwsA(HttpError.internalError));
+      sut.get(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.internalError);
+      });
     });
   });
 
@@ -326,9 +327,9 @@ void main() {
     test('Should return BadRequestError if put returns 400', () async {
       mockResponse(400, body: '');
 
-      final future = sut.put(url);
-
-      expect(future, throwsA(HttpError.badRequest));
+      sut.put(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.badRequest);
+      });
     });
 
     test('Should return BadRequestError if put returns 400', () async {
@@ -342,41 +343,41 @@ void main() {
     test('Should return UnauthorizedError if put returns 401', () async {
       mockResponse(401);
 
-      final future = sut.put(url);
-
-      expect(future, throwsA(HttpError.unauthorized));
+      sut.put(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.unauthorized);
+      });
     });
 
     test('Should return ForbiddenError if put returns 403', () async {
       mockResponse(403);
 
-      final future = sut.put(url);
-
-      expect(future, throwsA(HttpError.forbidden));
+      sut.put(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.forbidden);
+      });
     });
 
     test('Should return NotFoundError if put returns 404', () async {
       mockResponse(404);
 
-      final future = sut.put(url);
-
-      expect(future, throwsA(HttpError.notFound));
+      sut.put(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.notFound);
+      });
     });
 
     test('Should return InternalError if put returns 500', () async {
       mockResponse(500);
 
-      final future = sut.put(url);
-
-      expect(future, throwsA(HttpError.internalError));
+      sut.put(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.internalError);
+      });
     });
 
     test('Should return InternalError if put throws', () async {
       mockError();
 
-      final future = sut.put(url);
-
-      expect(future, throwsA(HttpError.internalError));
+      sut.put(url).catchError((error) {
+        if (error is GenericError) expect(error.type, HttpError.internalError);
+      });
     });
   });
 }

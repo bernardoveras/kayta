@@ -20,6 +20,7 @@ class KaytaButton extends StatelessWidget {
   final bool? outline;
   final bool? invertColors;
   final bool? isLoading;
+  final bool animate;
 
   KaytaButton(
     this.text, {
@@ -39,6 +40,7 @@ class KaytaButton extends StatelessWidget {
     this.textColor,
     this.textStyle,
     this.outlineWidth = 2,
+    this.animate = false,
   });
 
   @override
@@ -48,7 +50,7 @@ class KaytaButton extends StatelessWidget {
       onDoubleTap: onDoubleTap,
       onLongPress: onLongPress,
       child: AnimatedContainer(
-        duration: Duration(seconds: 5),
+        duration: Duration(seconds: animate == true ? 5 : 0),
         width: width,
         height: height,
         padding: EdgeInsets.zero,

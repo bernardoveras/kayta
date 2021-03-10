@@ -1,8 +1,7 @@
-
-
 import 'dart:io';
 import 'package:http/http.dart';
-import 'package:kayta/services/http/errors/http_errors.dart';
+import 'package:kayta/errors/errors.dart';
+import 'package:kayta/errors/http_errors.dart';
 import 'package:kayta/services/http/infraestructure/http_client.dart';
 import 'package:kayta/services/http/infraestructure/http_methods.dart';
 import 'http_helpers.dart';
@@ -60,12 +59,17 @@ class HttpAdapter implements IHttpClient {
             await futureResponse.timeout(timeout ?? Duration(seconds: 10));
       }
     } on SocketException catch (error) {
-      if (error.osError?.errorCode == 111 || error.osError?.errorCode == 7) {
-        throw HttpError.addressError;
-      }
-      throw HttpError.networkError;
+      throw GenericError(message: error.osError?.message);
+    } on ArgumentError catch (error) {
+      throw GenericError(
+        message: error.message ?? '',
+        type: HttpError.internalError,
+      );
     } catch (error) {
-      throw HttpError.internalError;
+      throw GenericError(
+        message: error.toString(),
+        type: HttpError.internalError,
+      );
     }
 
     return HttpHelpers.handleResponse(response);
