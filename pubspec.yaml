@@ -17,7 +17,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mocktail: ^0.0.1-dev.12
+  mocktail: ^0.0.2-dev.5
   faker: 2.0.0-rc.1
 
 flutter:

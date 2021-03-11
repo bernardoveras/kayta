@@ -3,9 +3,9 @@ import 'package:kayta/errors/errors.dart';
 import 'package:kayta/errors/http_errors.dart';
 import 'package:kayta/services/http/external/http_adapter.dart';
 import 'package:mocktail/mocktail.dart';
-// import 'package:mockito/mockito.dart';
-
 import 'package:flutter_test/flutter_test.dart';
+
+class UriFake extends Fake implements Uri {}
 
 class ClientSpy extends Mock implements Client {}
 
@@ -18,15 +18,17 @@ void main() {
     client = ClientSpy();
     sut = HttpAdapter(client);
     url = Uri.parse('www.api.com/teste');
+    registerFallbackValue<Uri>(Uri());
   });
 
   group('post', () {
-    mockRequest() => when(client).calls(#post).withArgs(positional: [
-          any
-        ], named: {
-          #body: any,
-          #headers: any,
-        });
+    mockRequest() => when(
+          () => client.post(
+            any(),
+            body: any(named: 'body'),
+            headers: any(named: 'headers'),
+          ),
+        );
 
     void mockResponse(int statusCode,
             {String body = '{"any_key":"any_value"}'}) =>
@@ -41,18 +43,20 @@ void main() {
     test('Should call post with correct values', () async {
       await sut.post(url, body: {"any_key": "any_value"});
 
-      verify(client).called(#post).withArgs(
-        named: {
-          #body: {"any_key": "any_value"}
-        },
-        positional: [any],
-      ).times(1);
+      verify(
+        () => client.post(
+          url,
+          body: {
+            "any_key": "any_value",
+          },
+        ),
+      ).called(1);
     });
 
     test('Should call post without body', () async {
       await sut.post(url);
 
-      verify(client).called(#post).times(1);
+      verify(() => client.post(url)).called(1);
     });
 
     test('Should return data if post returns 200', () async {
@@ -144,7 +148,12 @@ void main() {
   });
 
   group('get', () {
-    mockRequest() => when(client).calls(#get);
+    mockRequest() => when(
+          () => client.get(
+            any(),
+            headers: any(named: 'headers'),
+          ),
+        );
 
     void mockResponse(int statusCode,
             {String body = '{"any_key":"any_value"}'}) =>
@@ -159,16 +168,12 @@ void main() {
     test('Should call get with correct values', () async {
       await sut.get(url);
 
-      verify(client).called(#get).times(1);
+      verify(() => client.get(url)).called(1);
 
       await sut.get(url, headers: {'any_key': 'any_value'});
-
-      verify(client).called(#get).withArgs(
-        positional: [any],
-        named: {
-          #headers: {'any_key': 'any_value'},
-        },
-      ).times(1);
+      verify(
+        () => client.get(url, headers: {'any_key': 'any_value'}),
+      ).called(1);
     });
 
     test('Should return data if get returns 200', () async {
@@ -259,12 +264,12 @@ void main() {
   });
 
   group('put', () {
-    mockRequest() => when(client).calls(#put).withArgs(
-          positional: [any],
-          named: {
-            #body: any,
-            #headers: any,
-          },
+    mockRequest() => when(
+          () => client.put(
+            any(),
+            body: any(named: 'body'),
+            headers: any(named: 'headers'),
+          ),
         );
 
     void mockResponse(int statusCode,
@@ -280,18 +285,20 @@ void main() {
     test('Should call put with correct values', () async {
       await sut.put(url, body: {"any_key": "any_value"});
 
-      verify(client).called(#put).withArgs(
-        named: {
-          #body: {"any_key": "any_value"}
-        },
-        positional: [any],
-      ).times(1);
+      verify(
+        () => client.put(
+          url,
+          body: {
+            "any_key": "any_value",
+          },
+        ),
+      ).called(1);
     });
 
     test('Should call put without body', () async {
       await sut.put(url);
 
-      verify(client).called(#put).times(1);
+      verify(() => client.put(url)).called(1);
     });
 
     test('Should return data if put returns 200', () async {
