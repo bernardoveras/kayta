@@ -11,6 +11,9 @@ class ScaleOnTap extends StatefulWidget {
   final Curve? scaleCurve;
   final Curve? opacityCurve;
   final double? opacityMinValue;
+  final void Function(LongPressStartDetails)? onLongPressStart;
+  final void Function(LongPressEndDetails)? onLongPressEnd;
+  final void Function()? onTapCancel;
 
   ScaleOnTap({
     required this.onTap,
@@ -22,14 +25,16 @@ class ScaleOnTap extends StatefulWidget {
     this.opacityMinValue = 0.9,
     this.scaleCurve,
     this.opacityCurve,
+    this.onLongPressStart,
+    this.onLongPressEnd,
+    this.onTapCancel,
   });
 
   @override
   _ScaleTapState createState() => _ScaleTapState();
 }
 
-class _ScaleTapState extends State<ScaleOnTap>
-    with SingleTickerProviderStateMixin {
+class _ScaleTapState extends State<ScaleOnTap> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scale;
   late Animation<double> _opacity;
@@ -116,6 +121,9 @@ class _ScaleTapState extends State<ScaleOnTap>
         onPointerCancel: _onTapCancel,
         onPointerUp: _onTapUp,
         child: GestureDetector(
+          onLongPressStart: widget.onLongPressStart,
+          onLongPressEnd: widget.onLongPressEnd,
+          onTapCancel: widget.onTapCancel,
           onTap: widget.onTap,
           onLongPress: widget.onLongPress,
           onDoubleTap: widget.onDoubleTap,

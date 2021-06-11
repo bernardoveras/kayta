@@ -1,6 +1,3 @@
-
-
-import 'package:kayta/enums/units.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kayta/extensions/date_time_extensions.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -59,7 +56,16 @@ main() {
 
   test('Retornar a data adicionando 10 dias e sem hora', () {
     data = data.addDays(10, comHora: false);
-    expect(data, data.copy(day: 7, hour: 0, microsecond: 0, millisecond: 0, minute: 0, second: 0,));
+    expect(
+        data,
+        data.copy(
+          day: 7,
+          hour: 0,
+          microsecond: 0,
+          millisecond: 0,
+          minute: 0,
+          second: 0,
+        ));
   });
 
   test('Retornar a data adicionando 5 meses', () {
@@ -81,129 +87,4 @@ main() {
     data = data.copy(month: 3).ultimoDiaDoMes();
     expect(data, data.copy(day: 31));
   });
-
-  group('Test startOf() datetime', () {
-    test(
-        'test startOf() method with parsing date time should add and return correct start of date time in seconds',
-        () {
-      expect(
-          DateTime.parse('2019-10-13 13:12:12')
-              .startOf(Units.SECOND)
-              .toString(),
-          '2019-10-13 13:12:12.000');
-    });
-    test(
-        'test startOf() method with parsing date time should add and return correct start of date time in minutes',
-        () {
-      expect(
-          DateTime.parse('2019-10-13 13:12:12')
-              .startOf(Units.MINUTE)
-              .toString(),
-          '2019-10-13 13:12:00.000');
-    });
-    test(
-        'test startOf() method with parsing date time should add and return correct start of date time in hours',
-        () {
-      expect(
-          DateTime.parse('2019-10-13 13:12:12')
-              .startOf(Units.HOUR)
-              .toString(),
-          '2019-10-13 13:00:00.000');
-    });
-    test(
-        'test startOf() method with parsing date time should add and return correct start of date time in days',
-        () {
-      expect(
-          DateTime.parse('2019-10-13 13:12:12')
-              .startOf(Units.DAY)
-              .toString(),
-          '2019-10-13 00:00:00.000');
-    });
-    test(
-        'test startOf() method with parsing date time should add and return correct start of date time in months',
-        () {
-      expect(
-          DateTime.parse('2019-10-13 13:12:12')
-              .startOf(Units.MONTH)
-              .toString(),
-          '2019-10-01 00:00:00.000');
-    });
-    test(
-        'test startOf() method with parsing date time should add and return correct start of date time in years',
-        () {
-      expect(
-          DateTime.parse('2019-10-13 13:12:12')
-              .startOf(Units.YEAR)
-              .toString(),
-          '2019-01-01 00:00:00.000');
-    });
-  });
-
-  group('Test endOf() datetime', () {
-    test(
-        'test endOf() method with parsing date time should add and return correct end of date time in seconds',
-        () {
-      expect(
-          DateTime.parse('2019-10-13 13:12:12')
-              .endOf(Units.SECOND)
-              .toString(),
-          '2019-10-13 13:12:12.999');
-    });
-    test(
-        'test endOf() method with parsing date time should add and return correct end of date time in mintes',
-        () {
-      expect(
-          DateTime.parse('2019-10-13 13:12:12')
-              .endOf(Units.MINUTE)
-              .toString(),
-          '2019-10-13 13:12:59.999');
-    });
-    test(
-        'test endOf() method with parsing date time should add and return correct end of date time in hours',
-        () {
-      expect(
-          DateTime.parse('2019-10-13 13:12:12')
-              .endOf(Units.HOUR)
-              .toString(),
-          '2019-10-13 13:59:59.999');
-    });
-    test(
-        'test endOf() method with parsing date time should add and return correct end of date time in days',
-        () {
-      expect(
-          DateTime.parse('2019-10-13 13:12:12')
-              .endOf(Units.DAY)
-              .toString(),
-          '2019-10-13 23:59:59.999');
-    });
-    test(
-        'test endOf() method with parsing date time should add and return correct end of date time in months',
-        () {
-      expect(
-          DateTime.parse('2019-10-13 13:12:12')
-              .endOf(Units.MONTH)
-              .toString(),
-          '2019-10-31 23:59:59.999');
-      expect(
-          DateTime.parse('2019-02-13 13:12:12')
-              .endOf(Units.MONTH)
-              .toString(),
-          '2019-02-28 23:59:59.999');
-      expect(
-          DateTime.parse('2016-02-13 13:12:12')
-              .endOf(Units.MONTH)
-              .toString(),
-          '2016-02-29 23:59:59.999');
-    });
-    test(
-        'test endOf() method with parsing date time should add and return correct end of date time in years',
-        () {
-      expect(
-          DateTime.parse('2019-10-13 13:12:12')
-              .endOf(Units.YEAR)
-              .toString(),
-          '2019-12-31 23:59:59.999');
-    });
-  });
-
 }

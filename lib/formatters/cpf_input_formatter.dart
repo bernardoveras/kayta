@@ -1,7 +1,5 @@
-
-
-import 'package:kayta/formatters/compoundable_formatter.dart';
 import 'package:flutter/services.dart';
+import 'compoundable_formatter.dart';
 
 /// Formata o valor do campo com a mascara de CPF ( XXX.XXX.XXX-XX ).
 class CpfInputFormatter extends TextInputFormatter

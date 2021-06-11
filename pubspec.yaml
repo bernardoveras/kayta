@@ -4,20 +4,20 @@ description: Kayta by Bernardo Veras
 homepage: https://vvssistemas.com.br/
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=2.13.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  shimmer: ^2.0.0-nullsafety.0
-  http: ^0.13.0
+  shimmer: ^2.0.0 
+  http: ^0.13.3
   auto_size_text: ^3.0.0-nullsafety.0
   intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mocktail: ^0.0.2-dev.5
-  faker: 2.0.0-rc.1
+  mocktail: ^0.1.4
+  faker: ^2.0.0
 
 flutter:
