@@ -50,7 +50,6 @@ class HttpHelpers {
           message: response.body,
           type: HttpError.unauthorized,
         );
-        throw HttpError.unauthorized;
       case 403:
         throw GenericError(
           message: response.body,

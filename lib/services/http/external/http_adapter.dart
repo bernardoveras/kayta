@@ -19,7 +19,7 @@ class HttpAdapter implements IHttpClient {
 
   @override
   Future post(Uri url,
-      {dynamic? body, Map<String, String>? headers, Duration? timeout}) {
+      {dynamic body, Map<String, String>? headers, Duration? timeout}) {
     return _request(url,
         method: HttpMethods.POST,
         headers: headers,
@@ -29,7 +29,7 @@ class HttpAdapter implements IHttpClient {
 
   @override
   Future put(Uri url,
-      {dynamic? body, Map<String, String>? headers, Duration? timeout}) {
+      {dynamic body, Map<String, String>? headers, Duration? timeout}) {
     return _request(url,
         method: HttpMethods.PUT,
         headers: headers,
@@ -40,7 +40,7 @@ class HttpAdapter implements IHttpClient {
   Future<dynamic> _request(
     Uri url, {
     required HttpMethods method,
-    dynamic? body,
+    dynamic body,
     Map<String, String>? headers,
     Duration? timeout,
   }) async {
