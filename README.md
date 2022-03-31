@@ -24,7 +24,7 @@ Adicione o package no `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  kayta: ^1.0.1
+  kayta: ^1.0.4
 ```
 
 Importe o package
