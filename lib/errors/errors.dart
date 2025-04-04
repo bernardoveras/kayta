@@ -3,6 +3,11 @@ import 'package:kayta/errors/http_errors.dart';
 abstract class Failure implements Exception {
   String? get message;
   HttpError? get type;
+
+  @override
+  String toString() {
+    return message ?? super.toString();
+  }
 }
 
 class InternalError implements Failure {
